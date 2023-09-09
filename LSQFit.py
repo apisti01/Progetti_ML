@@ -7,6 +7,27 @@ def mylinfit(x,y):
 
     return a , b
 
+# Main
+#import correct libraries
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.backend_bases import MouseButton
+
+x = np.random.uniform(-2,5,10) # 10 random numbers between -2 and 5
+y = np.random.uniform(0,3,10) # 10 random numbers between 0 and 3
+
+fig = plt.figure()
+ax = fig.add_subplot()
+ax.set_xlim(-2,5)
+ax.set_ylim(0,3)
+
+#plot the points
+a,b = mylinfit(x,y)
+plt.plot(x,y,'kx')
+xp = np.arange(-2,5,0.1)
+plt.plot(xp,a*xp+b,'r-')
+print(f"My fit: a={b} and b={b}")
+
 #define what to do on mouse click
 def onclick(event):
     if event.button is MouseButton.LEFT:
@@ -38,30 +59,6 @@ def right_mouse_click(event):
     print(f"My fit: a={b} and b={b}")
     plt.draw() #redraw
 
-# Main
-#import correct libraries
-import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.backend_bases import MouseButton
-
-#Write a Python program that asks user to give N points with a mouse (left click: add point, rightclick: stop collecting) and then plots the points and a fitted linear model.
-
-x = np.random.uniform(-2,5,10) # 10 random numbers between -2 and 5
-y = np.random.uniform(0,3,10) # 10 random numbers between 0 and 3
-
-fig = plt.figure()
-ax = fig.add_subplot()
-ax.set_xlim(-2,5)
-ax.set_ylim(0,3)
-
-#plot the points
-a,b = mylinfit(x,y)
-plt.plot(x,y,'kx')
-xp = np.arange(-2,5,0.1)
-plt.plot(xp,a*xp+b,'r-')
-print(f"My fit: a={b} and b={b}")
-
-plt.show()
 
 #event loop for mouse clicks
 cid = fig.canvas.mpl_connect('button_press_event', onclick)
