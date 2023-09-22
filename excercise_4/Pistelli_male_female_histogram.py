@@ -3,15 +3,12 @@ import matplotlib.pyplot as plt
 
 # Load the data
 train_data = np.loadtxt('male_female_X_train.txt', delimiter=' ', dtype=float)
-#test_data = np.loadtxt('test.txt', delimiter=',')
 control_data_train = np.loadtxt('male_female_y_train.txt', delimiter=' ', dtype=float)
 
 
 # Split the data into male and female data
 male_train_data = train_data[control_data_train[:] == 0]
 female_train_data = train_data[control_data_train[:] == 1]
-#male_test_data = test_data[test_data[:, 0] == 1]
-#female_test_data = test_data[test_data[:, 0] == 0]
 
 # Compute the histograms
 male_height_hist, male_height_bins = np.histogram(male_train_data[:, 0], bins=10, range=(80, 220))
