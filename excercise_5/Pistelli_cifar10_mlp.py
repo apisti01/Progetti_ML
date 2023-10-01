@@ -46,7 +46,8 @@ y_test_one_hot = to_categorical(y_test, 10)
 # Create the neural network modelfi
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(3072,)),  # Flatten the input
-    keras.layers.Dense(5, activation='sigmoid'),      # Hidden layer with 5 neurons
+    keras.layers.Dense(20, activation='sigmoid'),      # Hidden layer with 20 neurons, no more 5
+    keras.layers.Dense(20, activation='sigmoid'),      # second  Hidden layer with 20 neurons, no more 5
     keras.layers.Dense(10, activation='sigmoid')   # Output layer with 10 neurons (for 10 classes)
 ])
 
@@ -59,7 +60,7 @@ model.compile(optimizer='adam',
 model.summary()
 
 # Set the number of epochs and batch size
-epochs = 30
+epochs = 40 # after 40 epochs the accuracy doesnt' increase anymore (tryed even with 300 epochs)
 batch_size = 32
 
 # Train the model
@@ -68,6 +69,10 @@ history = model.fit(x_train, y_train_one_hot,
                     batch_size=batch_size, 
                     validation_data=(x_test,y_test_one_hot), 
                     verbose=1)
+
+# Evaluate the model on the test data
+test_loss, test_accuracy = model.evaluate(x_test, y_test_one_hot, verbose=1)
+print(f'Test accuracy: {test_accuracy:.4f}')
 
 # Plot the training loss curve
 plt.figure(figsize=(8, 6))
@@ -78,7 +83,3 @@ plt.ylabel('Loss')
 plt.legend()
 plt.title('Training Loss Curve')
 plt.show()
-
-# Evaluate the model on the test data
-test_loss, test_accuracy = model.evaluate(x_test, y_test_one_hot, verbose=1)
-print(f'Test accuracy: {test_accuracy:.4f}')
