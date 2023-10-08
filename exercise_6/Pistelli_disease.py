@@ -3,7 +3,6 @@ from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import GridSearchCV
 
 
 '''LOADING THE DATA'''
@@ -13,7 +12,7 @@ y_train = np.loadtxt('/home/apisti01/Erasmus/Progetti_ML/exercise_6/disease_y_tr
 X_test = np.loadtxt('/home/apisti01/Erasmus/Progetti_ML/exercise_6/disease_X_test.txt', delimiter=' ')
 y_test = np.loadtxt('/home/apisti01/Erasmus/Progetti_ML/exercise_6/disease_y_test.txt', delimiter=' ')
 
-print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
+#print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
 
 '''A  BASELINE MODEL'''
 # Compute the regression baseline
@@ -60,4 +59,3 @@ y_pred_rf = rf_reg.predict(X_test)
 # Print the test set MSE for random forest
 test_mse_rf = mean_squared_error(y_test, y_pred_rf)
 print("Test set MSE for random forest: ", test_mse_rf)
-
